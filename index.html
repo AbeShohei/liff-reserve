@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ゼミ個別説明会予約</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    input, select, button { margin: 10px 0; width: 100%; padding: 10px; }
+  </style>
+</head>
+<body>
+  <h2>予約フォーム</h2>
+  <input type="text" id="name" placeholder="お名前を入力">
+  <select id="slot">
+    <option value="5月10日 10:00">5月10日 10:00</option>
+    <option value="5月10日 11:00">5月10日 11:00</option>
+    <option value="5月10日 13:00">5月10日 13:00</option>
+  </select>
+  <button onclick="submit()">予約する</button>
+
+  <script>
+    async function submit() {
+      await liff.init({ liffId: 'YOUR_LIFF_ID' });
+      const profile = await liff.getProfile();
+      const data = {
+        name: document.getElementById('name').value,
+        slot: document.getElementById('slot').value,
+        userId: profile.userId
+      };
+
+      const res = await fetch('YOUR_GAS_WEBAPP_URL', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      const result = await res.json();
+      alert(result.message);
+      liff.closeWindow();
+    }
+  </script>
+</body>
+</html>

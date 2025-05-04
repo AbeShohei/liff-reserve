@@ -22,7 +22,7 @@
 
   <script>
     async function submit() {
-      await liff.init({ liffId: 'YOUR_LIFF_ID' });
+      await liff.init({ liffId: 'Y2007365161' });
       const profile = await liff.getProfile();
       const data = {
         name: document.getElementById('name').value,
@@ -30,7 +30,7 @@
         userId: profile.userId
       };
 
-      const res = await fetch('YOUR_GAS_WEBAPP_URL', {
+      const res = await fetch('https://script.google.com/macros/s/AKfycbysFSSkQW6ta2gr8_0LFDszEodsVpCSenWSfjScVg_D5a_CLgO8HoAhuPhgZ4oSsdEW/exec', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
